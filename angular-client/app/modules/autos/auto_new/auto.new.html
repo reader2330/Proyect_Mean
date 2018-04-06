@@ -1,0 +1,75 @@
+<div ng-app="app.autos" ng-controller="AutoNewCtrl as vm">
+    <div class="container">
+
+        <div class="col-sm-1"></div>
+        <div class="col-xs-12 col-sm-10">
+            <form class="panel panel-primary" ui-sref="app.autos.list">
+                <div class="panel-heading"> <h4 align="center">Alta Auto</h4> </div>
+                    <div class="panel-body">
+                        <div class="form-group campo">
+                            <label for="Marca"> Selecciona una Marca</label>
+                            <div class="input-group">
+                            <span class="input-group-addon">Marca</span>
+                            <select  ng-change="vm.setMarca()" class="form-control" ng-model="vm.body.marca" name="Marca" id="Marca" ng-options="brand.id as brand.name for brand in vm.brands" required></select>
+                            </div>
+                        </div>
+                        <div class="form-group campo">
+                            <label for="Modelo"> Selecciona un Modelo</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">Modelo</span>
+                                <select  class="form-control" ng-model="vm.body.modelo" name="Modelo" id="Modelo" ng-options="modelo.nombre as modelo.nombre for modelo in vm.models" required></select>
+                            </div>
+                        </div>
+                        <div class="form-group campo">
+                            <label for="year"> Seleccione un año</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fas fa-calendar-alt"></i></span>
+                                <select class="form-control" name="year" id="year" ng-model="vm.body.year" ng-options="year for year in vm.years" required></select>
+                            </div>
+                        </div>
+                        <div class="form-group campo">
+                            <label > Seleccione un color</label>
+                            <div class="input-group">
+                                <label class="radio-inline radio ">
+                                    <input type="radio" ng-model="vm.body.color" value="Rojo" name="optradio"><button class="color_boton" style="background: red" disabled></button>
+                                </label>
+                                <label class="radio-inline radio">
+                                    <input type="radio" ng-model="vm.body.color" value="Azul" name="optradio"><button class="color_boton" style="background: blue" disabled></button>
+                                </label>
+                                <label class="radio-inline radio">
+                                    <input type="radio" ng-model="vm.body.color" value="Negro" name="optradio"><button class="color_boton" style="background: black" disabled></button>
+                                </label>
+                                <label class="radio-inline radio">
+                                    <input type="radio" ng-model="vm.body.color" value="Blanco" name="optradio"><button class="color_boton" style="background: whitesmoke" disabled></button>
+                                </label>
+                                <label class="radio-inline radio">
+                                    <input type="radio" ng-model="vm.body.color" value="Gris" name="optradio"><button class="color_boton" style="background: gray" disabled></button>
+                                </label>
+
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group campo">
+                            <button class="btn btn-primary" style="margin-left: 200px" ng-click="vm.create()"> Enviar</button>
+                        </div>
+
+
+                    </div>
+
+
+            </form>
+        </div>
+        <div class="col-sm-1"></div>
+
+    </div>
+
+
+
+</div>
+
+
+
+

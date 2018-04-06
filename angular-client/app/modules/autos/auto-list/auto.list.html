@@ -1,0 +1,162 @@
+<div ng-app="app.autos" ng-controller="AutoListCtrl as vm">
+        <div class="container">
+
+                        <div class="panel-group">
+                                <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                        <i class="fas fa-search-plus"></i>Busqueda Avanzada
+                                                </h4>
+                                        </div>
+                                        <div class="panel-body">
+
+                                                <form class="row">
+
+                                                        <div class="form-group campo">
+                                                                <label for="Marca"> Selecciona una Marca</label>
+                                                                <div class="input-group">
+                                                                        <span class="input-group-addon">Marca</span>
+                                                                        <select  ng-change="vm.setMarca()" class="form-control" ng-model="vm.body.marca" name="Marca" id="Marca" ng-options="brand.id as brand.name for brand in vm.brands" required></select>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="form-group campo">
+                                                                <label for="Modelo"> Selecciona un Modelo</label>
+                                                                <div class="input-group">
+                                                                        <span class="input-group-addon">Modelo</span>
+                                                                        <select  class="form-control" ng-model="vm.body.modelo" name="Modelo" id="Modelo" ng-options="modelo.nombre as modelo.nombre for modelo in vm.models" required></select>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="form-group campo">
+                                                                <label for="year"> Seleccione un año</label>
+                                                                <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="fas fa-calendar-alt"></i></span>
+                                                                        <select class="form-control" name="year" id="year" ng-model="vm.body.year" ng-options="year for year in vm.years" required></select>
+                                                                </div>
+                                                        </div>
+
+                                                         <button  ng-click="vm.Busqueda()" class="btn btn-primary col-sm-4" style="margin-left: 50px"> <i class="fas fa-search-plus"></i>Buscar</button>
+                                                         <button  ng-click="vm.getAutos()" class="btn btn-default col-sm-4" style="margin-left: 130px"> <i class="far fa-list-alt"></i>Ver Todos</button>
+                                                </form>
+
+
+                                        </div>
+
+                                </div>
+                        </div>
+
+
+                        <div class="panel panel-default">
+
+                                <div class="panel-heading">Autos</div>
+
+                                <!-- Table -->
+                                <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                                <th ng-repeat="campo in vm.campos">{{campo}}</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="car in vm.autos_l">
+                                                <td>{{car.Folio}}</td>
+                                                <td>{{car.Marca}}</td>
+                                                <td>{{car.Modelo}}</td>
+
+
+                                                <td ><button type="button"  ng-click="vm.getAuto(car.Folio)" class="btn btn-primary btn" data-toggle="modal" data-target="#detalles">
+                                                        <i class="fas fa-eye"></i>
+                                                </button></td>
+                                                <td ><button type="button"  ng-click="vm.getAuto(car.Folio)" class="btn btn-warning btn" data-toggle="modal" data-target="#update">
+                                                        <i class="fas fa-pen-square"></i>
+                                                </button></td>
+                                                <td><button style="margin-left: 30px" class="btn btn-danger btn" ng-click="vm.borrarAuto(car)"><i class="fas fa-trash-alt"></i></button></td>
+                                        </tr>
+
+                                        </tbody>
+                                </table>
+                        </div>
+
+
+                <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="ver">
+                        <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">{{vm.auto_i.Modelo}} - {{vm.auto_i.Year}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                <form class="panel panel-warning" ui-sref="app.autos.list">
+                                                        <div class="panel-heading"> <h4 align="center">Modificación Auto</h4> </div>
+                                                        <div class="panel-body">
+                                                                <div class="form-group campo">
+                                                                        <label > Seleccione un color</label>
+                                                                        <div class="input-group">
+                                                                                <label class="radio-inline radio ">
+                                                                                        <input type="radio" ng-model="vm.auto_i.Color" value="Rojo" name="optradio"><button class="color_boton" style="background: red" disabled></button>
+                                                                                </label>
+                                                                                <label class="radio-inline radio">
+                                                                                        <input type="radio" ng-model="vm.auto_i.Color" value="Azul" name="optradio"><button class="color_boton" style="background: blue" disabled></button>
+                                                                                </label>
+                                                                                <label class="radio-inline radio">
+                                                                                        <input type="radio" ng-model="vm.auto_i.Color" value="Negro" name="optradio"><button class="color_boton" style="background: black" disabled></button>
+                                                                                </label>
+                                                                                <label class="radio-inline radio">
+                                                                                        <input type="radio" ng-model="vm.auto_i.Color" value="Blanco" name="optradio"><button class="color_boton" style="background: whitesmoke" disabled></button>
+                                                                                </label>
+                                                                                <label class="radio-inline radio">
+                                                                                        <input type="radio" ng-model="vm.auto_i.Color" value="Gris" name="optradio"><button class="color_boton" style="background: gray" disabled></button>
+                                                                                </label>
+
+                                                                        </div>
+                                                                        <div class=" campo ">
+                                                                                <label > Rango Seguridad</label>
+                                                                                <rzslider  rz-slider-model="vm.slider.value"
+                                                                                          rz-slider-options="vm.slider.options"></rzslider>
+                                                                        </div>
+                                                                </div>
+
+                                                        </div>
+
+
+                                                </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" ng-click="vm.updateAuto()" class="btn btn-primary" data-dismiss="modal">Update</button>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <div class="modal fade" id="detalles" tabindex="-1" role="dialog" aria-labelledby="detalles">
+                        <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                        <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="detail">Detalles</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                                <ul class="list-group">
+                                                        <li class="list-group-item">Folio :  {{vm.auto_i.Folio}}</li>
+                                                        <li class="list-group-item">Marca : {{vm.auto_i.Marca}}</li>
+                                                        <li class="list-group-item">Modelo : {{vm.auto_i.Modelo}}</li>
+                                                        <li class="list-group-item">Color : {{vm.auto_i.Color}}</li>
+                                                        <li class="list-group-item">Year : {{vm.auto_i.Year}}</li>
+                                                        <li class="list-group-item">Seguridad : {{vm.auto_i.Seguridad}}</li>
+                                                </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+
+
+
+        </div>
+
+</div>

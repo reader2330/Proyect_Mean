@@ -1,0 +1,41 @@
+a{
+
+    text-decoration: none;
+    color: black;
+
+}
+
+
+
+.nav_inicio{
+
+
+    height: 100px;
+
+}
+.logo{
+
+    width: 100px;
+    height: 60px;
+}
+.form_nav{
+
+    margin-top: 30px;
+
+}
+
+.lista{
+
+    margin-top: 20px;
+
+
+}
+
+.lista_link{
+
+    margin-left: 50px;
+    margin-right: 20px;
+
+}
+
+
